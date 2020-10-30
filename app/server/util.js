@@ -25,11 +25,14 @@ exports.basicAuth = function basicAuth (req, res, next) {
     debug('myAuth.name: ' + myAuth.name.yellow.bold.underline +
       ' and password ' + ((myAuth.pass) ? 'exists'.yellow.bold.underline
       : 'is blank'.underline.red.bold))
+
+    req.session.privatekey = defaultCredentials.privatekey
   } else {
-    req.session.username = req.query.user ? req.query.user : defaultCredentials.username
+    req.session.username = defaultCredentials.username
     req.session.userpassword = defaultCredentials.password
     req.session.privatekey = defaultCredentials.privatekey
   }
+  console.log(req.session);
   if ((!req.session.username) || ((!req.session.userpassword) && (!req.session.privatekey))) {
     res.statusCode = 401
     debug('basicAuth credential request (401)')
