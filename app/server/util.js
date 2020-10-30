@@ -24,7 +24,7 @@ exports.basicAuth = function basicAuth (req, res, next) {
       ' and password ' + ((myAuth.pass) ? 'exists'.yellow.bold.underline
       : 'is blank'.underline.red.bold))
   } else {
-    req.session.username = defaultCredentials.username
+    req.session.username = req.query.user ? req.query.user : defaultCredentials.username
     req.session.userpassword = defaultCredentials.password
     req.session.privatekey = defaultCredentials.privatekey
   }
